@@ -10,8 +10,8 @@ using namespace std;
 unsigned long long hits = 0;
 unsigned long long accesses = 0;
 
-// [10%] Direct-Mapped Cache. Assume that each cache line has a size of 32
-// bytes and model the caches sized at 1KB, 4KB, 16KB and 32KB
+// Direct-Mapped Cache. Assumes that each cache line has a size of 32 bytes, 
+// and simulates storing caches with size 1KB, 4KB, 16KB and 32KB
 void directMappedCache(string filePath, ofstream &fout, int cacheSize) {
     hits = 0;
     accesses = 0;
@@ -38,9 +38,9 @@ void directMappedCache(string filePath, ofstream &fout, int cacheSize) {
     fout << hits << "," << accesses << "; ";
 }
 
-// [20%] Set-Associative Cache. Again, assume that the cache line size is 32
-// bytes and model a 16KB cache with associativity of 2, 4, 8 and 16. Assume
-// that the least recently used (LRU) replacement policy is implemented.
+// Set-Associative Cache. Assumes that the cache line size is 32 bytes and 
+// simulates a 16KB cache with associativity of 2, 4, 8 and 16. Least Recently 
+// Used (LRU) replacement policiy is implemented (Item accessed least recently is replaced from cache)
 void setAssociativeCache(string filePath, ofstream &fout, int associativity) {
     struct CacheBlock {
         unsigned long long tag;
@@ -97,14 +97,12 @@ void setAssociativeCache(string filePath, ofstream &fout, int associativity) {
     fout << hits << "," << accesses << "; ";
 }
 
-// [20%] Fully-Associative cache. Assume that each cache line is 32 bytes and
-// the total cache size is 16KB. Implement Least Recently Used (LRU) and
-// hot-cold LRU approximation policies. For the hot-cold LRU approximation
-// policy the initial state of all hot-cold bits should be 0 corresponding to
-// the case where the left child is “hot” and the right child is “cold”.
-// Furthermore, the policy should be utilized (and updated) for all accesses,
-// including placing the initial blocks into the cache as well as replacements
-// once the cache is full.
+// Fully-Associative cache: Assumes each cache line is 32 bytes and the 
+// total cache size is 16KB. Least Recently Used (LRU) and hot-cold LRU approximation 
+// policies are implemented. For the hot-cold LRU approximation policy, initial state of 
+// all hot-cold bits are 0 (Case where the left child is “hot” and the right child is “cold”). 
+// The policy is utilized and updated for all accesses, including placing initial blocks into 
+// the cache as well as replacements once cache is full
 void fullyAssociativeCache(string filePath, ofstream &fout, bool hotColdLRU) {
     struct CacheBlock {
         unsigned long long tag; //Stores tag
@@ -171,10 +169,10 @@ void fullyAssociativeCache(string filePath, ofstream &fout, bool hotColdLRU) {
     fout << hits << "," << accesses << ";" << endl;
 }
 
-// [10%] Set-Associative Cache with no Allocation on a Write Miss. In this
-// design, if a store instruction misses into the cache, then the missing line
-// is not written into the cache, but instead is written directly to memory.
-// Evaluate this design for the same configurations as in question (2) above.
+// Set-Associative Cache with no Allocation on a Write Miss: Assumes that the cache line 
+// size is 32 bytes and simulates a 16KB cache with associativity of 2, 4, 8 and 16. In this 
+// design, if store instruction misses into cache, then missing line is not written into cache, 
+// but instead written directly to memory
 void setAssociativeNoWriteCache(string filePath, ofstream &fout, int associativity) {
     struct CacheBlock {
         unsigned long long tag;
@@ -232,13 +230,12 @@ void setAssociativeNoWriteCache(string filePath, ofstream &fout, int associativi
     fout << hits << "," << accesses << "; ";
 }
 
-// [20%] Set-Associative Cache with Next-line Prefetching. In this design, the
-// next cache line will be brought into the cache with every cache access. For
-// example, if current access is to line X, then line (x+1) is also brought into
-// the cache, replacing the cache’s previous content. Evaluate this design for
-// the same configurations as in question (2) above. Note that prefetched blocks
-// should update the LRU order of the corresponding set meaning that the
-// prefetched block should become the most recently used block in its set.
+// Set-Associative Cache with Next-line Prefetching: Assumes that the cache line size 
+// is 32 bytes and simulates a 16KB cache with associativity of 2, 4, 8 and 16. In this design, 
+// next cache line is brought into cache with every cache access. For example, if current access 
+// is to line X, then line (x+1) is also brought into the cache, replacing the cache’s previous content. 
+// The prefetched blocks updates the LRU order of the corresponding set. I.E the prefetched block becomes 
+// the most recently used block in its set
 void setAssociativeNextLinePrefetchingCache(string filePath, ofstream &fout) {
     bool hit = false;
     int cacheSize = 16384;
@@ -336,7 +333,8 @@ void setAssociativeNextLinePrefetchingCache(string filePath, ofstream &fout) {
     }
 }
 
-
+// Set-Associative Cache with Prefetch-on-a-Miss: Same as Set-Associative Cache 
+// with Next-line Prefetching, except that prefetching is only triggered on cache miss
 void setAssociativePrefetchOnMissCache(string filePath, ofstream &fout) {
     struct CacheBlock {
         unsigned long long tag;

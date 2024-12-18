@@ -15,7 +15,7 @@ unsigned long long addr;
 string behavior, line;
 unsigned long long target;
 
-//[5%] Always Taken.
+//Always Taken
 void alwaysTaken(ofstream& outputFile){
   correctPredictions = 0;
   numBranches = 0;       
@@ -31,7 +31,7 @@ void alwaysTaken(ofstream& outputFile){
   outputFile << "" << correctPredictions << "," << numBranches << ";" << endl;
 }
 
-//[5%] Always Non-Taken
+//Always Non-Taken
 void alwaysNotTaken(ofstream& outputFile){
   correctPredictions = 0;
   numBranches = 0;       
@@ -48,9 +48,9 @@ void alwaysNotTaken(ofstream& outputFile){
 }
 
 /*
-[10%] Bimodal Predictor with a single bit of history stored in each predictor
+Bimodal Predictor with a single bit of history stored in each predictor
 entry. Determine the prediction accuracy of this predictor for the table size of 16,
-32, 128, 256, 512, 1024 and 2048 entries. Assume that the initial state of all
+32, 128, 256, 512, 1024 and 2048 entries. Assuming initial state of all
 prediction counters is “Taken” (T) 
 */
 void oneBitBimodal(ofstream& outputFile){
@@ -102,9 +102,9 @@ void oneBitBimodal(ofstream& outputFile){
 }
 
 /*
-[20%] Bimodal Predictor with 2-bit saturating counters stored in each
-predictor entry. Repeat the same experiments as in part (3) above. Assume that
-the initial state of all prediction counters is “Strongly Taken” (TT)
+Bimodal Predictor with 2-bit saturating counters stored in each
+predictor entry. Assuming that the initial state of all prediction counters 
+is “Strongly Taken” (TT)
 */
 void twoBitBimodal(ofstream& outputFile){
   // Define table sizes
@@ -140,7 +140,7 @@ void twoBitBimodal(ofstream& outputFile){
       s >> hex >> addr >> behavior >> hex >> target;
       int bimodalIndex = addr & mask;
 
-      // Compare prediction table and actual outcome
+      //Compare prediction table and actual outcome
       //Correct taken prediction
       if(behavior == "T" && (table[bimodalIndex] == "WT"|| table[bimodalIndex] == "TT")){
           correctPredictions++;
@@ -173,16 +173,13 @@ void twoBitBimodal(ofstream& outputFile){
 }
 
 /*
-[20%] Gshare predictor, where the PC is XOR-ed with the global history bits to
-generate the index into the predictor table. Fix the table size at 2048 entries and
-determine the prediction accuracy as a function of the number of bits in the
-global history register. Vary the history length from 3 bits to 11 bits in 1-bit
-increments. Assume that the initial state of all prediction counters is “Strongly
-Taken” (TT). The global history register should be initialized to contain all zeroes
-(where 0=NT and 1=T). The global history register should be maintained such
-that the least significant bit of the register represents the result of the most recent
-branch, and the most significant bit of the register represents the result of the
-least recent branch in the history.
+Gshare Predictor: PC is XOR-ed with the global history bits to generate the index into the predictor table. 
+Determnes prediction accuracy as function of the number of bits in the global history register. 
+Table is fized size of 2048 entries, history length is varied from 3 bits to 11 bits in 1-bit increments. 
+Initial state of all prediction counters is assumed as Strongly Taken” (ST). The global history register 
+is initialized to contain all zeroes (where 0=NT and 1=T). The global history register is maintained in a way 
+such that the least significant bit of the register represents the result of the most recent branch, and the
+most significant bit of the register represents the result of the least recent branch in the history
 */
 void gShare(ofstream& outputFile){
   int pcBits = 0;
@@ -282,14 +279,13 @@ void gShare(ofstream& outputFile){
 }
 
 /*
-[30%] Tournament Predictor. The tournament predictor selects between Gshare and bimodal predictor for every branch. 
-Configure Gshare with 2048-entry table and 11 bits of global history, and configure bimodal predictor with 2048-entry table. 
-Furthermore, configure the selector table with 2048 entries and use the same index as you use for bimodal predictor to index 
-into the selector table (that is, the PC). For each entry in the selector, the two-bit counter encodes the following 
-states: 00 – prefer Gshare, 01 – weakly prefer Gshare, 10 – weakly prefer Bimodal, 11 – prefer bimodal. If the two predictors 
-provide the same prediction, then the corresponding selector counter remains the same. If one of the predictors is correct and 
-the other one is wrong, then the selector’s counter is decremented or incremented to move towards the predictor that was correct. 
-Initialize all the component predictors to “Strongly Taken” and initialize the selector’s counters to “Prefer Gshare”.
+Tournament Predictor: Selects between Gshare and bimodal predictor for every branch. 
+Gshare is configured with table size of 2048 entries and 11 bits of global history. Bimodal is 
+configured with table size of 2048 entries. For each entry in the selector, the two-bit counter 
+encodes the following states: 00 (Prefer Gshare) , 01 (Weakly Prefer Gshare), 10 (Weakly Prefer Bimodal), 
+11 (Prefer Bimodal). If the two predictors provide the same prediction, then corresponding selector counter 
+remains the same. If one of the predictors is correct and the other one is wrong, then the selector’s counter 
+is decremented or incremented to move towards the predictor that was correct
 */
 void tournament(ofstream& outputFile){
   correctPredictions = 0; 
