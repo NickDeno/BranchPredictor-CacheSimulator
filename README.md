@@ -23,11 +23,11 @@ The goal of this project is to measure the effectiveness of several branch direc
 The following results were based on the secret-trace.txt file, which contains ~10,000,000 branch instructions
 * Always Taken: 3,634,666 correct predictions
 * Always Not-Taken: 6,365,334 correct predictions
-* Bimodal (One bit History): 7,323,526 (Table size 16KB), 7,467,573 (Table size 32KB), 8,561,861 (Table size 64KB), 8,744,725 (Table size 128KB), 8,903,997 (Table size 256KB), 9,049,328 (Table size 512KB), 9,129,557 (Table size 1024KB)
-* Bimodal (Two bit History): 7,933,716 (Table size 16KB), 8,041,369 (Table size 32KB), 8,805,438 (Table size 64KB), 9,047,466 (Table size 128KB), 9,188,009 (Table size 256KB), 9,322,297 (Table size 512KB), 9,392,829 (Table size 1024KB)
-* Gshare: 9,467,918 (Table size 16KB), 9,427,395 (Table size 32KB), 9,353,733 (Table size 64KB), 9,373,370 (Table size 128KB), 9,379,025 (Table size 256KB), 9,388,446 (Table size 512KB), 9,359,756 (Table size 1024KB), 9,344,103 (Table size 2048KB)
-* Tournament: 9,657,332 (Table size 2048KB)
-* Branch Target Buffer (BTB): (Table size 2048KB) 2,973,497 branch target predicitions, and 3,635,021 attempted predictions
+* Bimodal (One bit History): 7,323,526 correct predictions (Table size 16KB), 7,467,573 correct predictions (Table size 32KB), 8,561,861 correct predictions (Table size 64KB), 8,744,725 correct predictions (Table size 128KB), 8,903,997 correct predictions (Table size 256KB), 9,049,328 correct predictions (Table size 512KB), 9,129,557 correct predictions (Table size 1024KB)
+* Bimodal (Two bit History): 7,933,716 correct predictions (Table size 16KB), 8,041,369 correct predictions (Table size 32KB), 8,805,438 correct predictions (Table size 64KB), 9,047,466 correct predictions (Table size 128KB), 9,188,009 correct predictions (Table size 256KB), 9,322,297 correct predictions (Table size 512KB), 9,392,829 correct predictions (Table size 1024KB)
+* Gshare: 9,467,918 correct predictions (Table size 16KB), 9,427,395 correct predictions (Table size 32KB), 9,353,733 correct predictions (Table size 64KB), 9,373,370 correct predictions (Table size 128KB), 9,379,025 correct predictions (Table size 256KB), 9,388,446 correct predictions (Table size 512KB), 9,359,756 correct predictions (Table size 1024KB), 9,344,103 correct predictions (Table size 2048KB)
+* Tournament: 9,657,332 correct predictions (Table size 2048KB)
+* Branch Target Buffer (BTB): (Table size 2048KB) 2,973,497 correct branch target predicitions, and 3,635,021 attempted branch target predictions
 
 
 ## CacheSimulator Outline
